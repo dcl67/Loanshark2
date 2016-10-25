@@ -1,0 +1,12 @@
+/* Main styles for Proposal Tracking */
+body.inverse, body.inverse .form-control {
+    color: #000 !important;
+}
+
+.navbar{
+    margin-bottom:0 !important;
+}
+
+.main{
+    padding-top: 40px;
+}
