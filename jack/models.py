@@ -9,7 +9,7 @@ BUILDING_CHOICES = (
 )
 
 class JackInfo(models.Model):
-    buildingname = models.CharField(max_length=50)
+    buildingname = models.CharField(max_length=50) #BUILDING_CHOICES)
     roomnumber = models.CharField(max_length=10)
     person = models.CharField(max_length=50)
     callerid = models.CharField(max_length=50)
@@ -18,7 +18,7 @@ class JackInfo(models.Model):
     
 
     #def __str__(self):              # __unicode__ on Python 2
-        #return self.buildingname + ' ' + self.roomnumber
+        #return self.jacks.buildingname + ' ' + self.roomnumber
 """
 class Room(models.Model):
     roomnumber = models.CharField(max_length=100)

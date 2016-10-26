@@ -1,1 +1,38 @@
-This is a test.
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Building & Room Number</th>
+            <th>Person</th>
+            <th>Caller ID</th> {% comment %} Or display name {% endcomment %}
+            <th>Port Number</th>
+            <th>Port Status</th> {% comment %} Active/Inactive--> {% endcomment %}
+            <th class="text-right"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in jacks %} {% comment %} port isn't right object. Double-check and fix. {% endcomment %}
+            <tr>
+                <td>
+                    <a>{{ p.buildingname }} {{p.roomnumber}}</a>
+                </td>
+                <td>
+                    {{ p.person }}
+                </td>
+                <td>
+                    {{ p.callerid }}
+                </td>
+                <td>
+                    {{ p.portnumber }}
+                </td>
+                <td>
+                    {{ p.portstatus }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
