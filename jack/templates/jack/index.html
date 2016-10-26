@@ -8,6 +8,7 @@
             <th>Person</th>
             <th>Caller ID</th> {% comment %} Or display name {% endcomment %}
             <th>Port Number</th>
+            <th>Port Type</th>
             <th>Port Status</th> {% comment %} Active/Inactive--> {% endcomment %}
             <th class="text-right"></th>
         </tr>
@@ -28,7 +29,24 @@
                     {{ p.portnumber }}
                 </td>
                 <td>
-                    {{ p.portstatus }}
+                    {{ p.type }}
+                </td>
+                <td>
+                    {% if p.portstatus is True %}
+                        <div align="center">
+                            <img src="/static/mk/img/icon-yes.svg" alt="True">
+                        </div>
+                    {% endif %}
+                    {% if p.portstatus is False %}
+                        <div align="center">
+                            <img src="/static/mk/img//icon-no.svg" alt="False">
+                        </div>
+                    {% endif %}
+                    {% if p.portstatus != True and p.portstatus != False %}
+                        <div align="center">
+                            <i class="material-icons" alt="True">error</i>
+                        </div>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

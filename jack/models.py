@@ -9,12 +9,14 @@ BUILDING_CHOICES = (
 )
 
 class JackInfo(models.Model):
-    buildingname = models.CharField(max_length=50) #BUILDING_CHOICES)
-    roomnumber = models.CharField(max_length=10)
-    person = models.CharField(max_length=50)
-    callerid = models.CharField(max_length=50)
-    portnumber = models.CharField(max_length=50)
+    buildingname = models.CharField(max_length=50, blank=False) #BUILDING_CHOICES)
+    roomnumber = models.CharField(max_length=10, blank=False)
+    person = models.CharField(max_length=50, blank=False)
+    callerid = models.CharField(max_length=50, blank=False)
+    portnumber = models.CharField(max_length=50, blank=False)
+    type = models.CharField(max_length=10, blank=False)
     portstatus = models.BooleanField(default=False)
+
     
 
     #def __str__(self):              # __unicode__ on Python 2
@@ -55,6 +57,6 @@ class PortActive(models.Model):
 class JackForm(ModelForm):
 	class Meta:
 		model = JackInfo
-		fields = ['buildingname', 'roomnumber', 'person', 'callerid', 'portnumber', 'portstatus']
+		fields = ['buildingname', 'roomnumber', 'person', 'callerid', 'portnumber', 'type', 'portstatus']
         db_table = 'jackinfo'
 
