@@ -10,3 +10,4 @@ class JackInfoAdmin(admin.ModelAdmin):
     ordering = ('portnumber',)
 
 admin.site.register(JackInfo, JackInfoAdmin)
+admin.site.register(Status)

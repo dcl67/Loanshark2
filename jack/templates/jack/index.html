@@ -7,9 +7,9 @@
             <th>Building & Room Number</th>
             <th>Person</th>
             <th>Caller ID</th> {% comment %} Or display name {% endcomment %}
-            <th>Port Number</th>
-            <th>Port Type</th>
-            <th>Port Status</th> {% comment %} Active/Inactive--> {% endcomment %}
+            <th>Jack Number</th>
+            <th>Jack Type</th>
+            <th>Jack Status</th> 
             <th class="text-right"></th>
         </tr>
     </thead>
@@ -47,6 +47,12 @@
                             <i class="material-icons" alt="True">error</i>
                         </div>
                     {% endif %}
+                </td>
+                <td class="td-actions text-right">
+                <button type="button" rel="tooltip" class="btn btn-info btn-round" data-toggle="tooltip" data-placement="bottom" title="{{ p.website}}">
+                    {% comment %} <a href="{% url 'profile_detail' p.user.id %}">{{ p.user.first_name }} {{ p.user.last_name }}</a> make this a link {% endcomment %}
+                    <i class="material-icons">create</i>
+                </button>
                 </td>
             </tr>
         {% endfor %}
