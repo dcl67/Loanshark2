@@ -17,15 +17,15 @@ class Status(models.Model):
 class JackInfo(models.Model):
     buildingname = models.CharField(max_length=50, blank=False) #BUILDING_CHOICES)
     roomnumber = models.CharField(max_length=10, blank=False)
-    person = models.CharField(max_length=50, blank=False)
-    callerid = models.CharField(max_length=50, blank=False)
     portnumber = models.CharField(max_length=50, blank=False)
-    type = models.CharField(max_length=10, blank=False)
-    portstatus = models.ForeignKey(Status)
+    type = models.CharField(max_length=20, blank=False)
+    callerid = models.CharField(max_length=50, blank=True)
+    phone_extension = models.CharField(max_length=10, blank=True)
 
+    def __unicode(self):
+        return self.roomnumber
 # class JackForm(ModelForm):
 # 	class Meta:
 # 		model = JackInfo
 # 		fields = ['buildingname', 'roomnumber', 'person', 'callerid', 'portnumber', 'type', 'portstatus']
 #         db_table = 'jackinfo'
-

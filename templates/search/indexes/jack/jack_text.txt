@@ -1,0 +1,6 @@
+{{ object.buildingname }}
+{{ object.roomnumber }}
+{{ object.person }}
+{{ object.portnumber }}
+{{ object.portstatus }}
+{{ object.type }}
