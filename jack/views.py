@@ -28,8 +28,9 @@ def EditJackInfo(request, pk):
         building_name = form.cleaned_data['building_name']
         room_number = form.cleaned_data['room_number']
         port_number = form.cleaned_data['port_number']
+        in_plate_type = form.cleaned_data['in_plate_type']
         type = form.cleaned_data['type']
-        caller_id = form.cleaned_data['caller_id']
+        display_name = form.cleaned_data['display_name']
         phone_extension = form.cleaned_data['phone_extension']
         form.save()
         return HttpResponseRedirect(reverse('jack'))
@@ -41,8 +42,9 @@ def AddJack(request):
         building_name = form.cleaned_data['building_name']
         room_number = form.cleaned_data['room_number']
         port_number = form.cleaned_data['port_number']
+        in_plate_type = form.cleaned_data['in_plate_type']
         type = form.cleaned_data['type']
-        caller_id = form.cleaned_data['caller_id']
+        display_name = form.cleaned_data['display_name']
         phone_extension = form.cleaned_data['phone_extension']
         form.save()
         return HttpResponseRedirect(reverse('jack'))
@@ -58,14 +60,16 @@ def DeleteConf(request):
 def ExportCSV(request):
     response = HttpResponse(content_type='text/csv')
     response['Jack_Info'] = 'attachment; filename="jacklist.csv"'
+    model = []
+    model = JackInfo.objects.all()
     writer = csv.writer(response)
     headers = []
 
     for field in JackInfo.objects.all():
-        headers.append(field.name)
+        headers.append(field)
     writer.writerow(headers)
 
-    for obj in qs:
+    for obj in model:
         row = []
         for field in headers:
             val = getattr(obj, field)

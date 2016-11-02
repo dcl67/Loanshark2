@@ -12,3 +12,4 @@ class JackInfoAdmin(admin.ModelAdmin):
 admin.site.register(JackInfo, JackInfoAdmin)
 admin.site.register(BuildingName)
 admin.site.register(JackType)
+admin.site.register(InPlateType)

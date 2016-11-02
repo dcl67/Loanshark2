@@ -28,6 +28,7 @@
         <tr>
             <th>Building & Room Number</th>
             <th>Jack Number</th>
+            <th>In Plate Type</th>
             <th>Jack Type</th> {% comment %} Or display name {% endcomment %}
             <th>Name/Display Name</th>
             <th>Phone extension</th>
@@ -42,6 +43,9 @@
                 </td>
                 <td>
                     {{ p.port_number }}
+                </td>
+                <td>
+                    {{ p.in_plate_type }}
                 </td>
                 <td>
                     {{ p.type }}
