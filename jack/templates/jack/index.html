@@ -17,8 +17,10 @@
             </label>
             <input type="text" size="40" name="q" value id="searchbar" autofocus>
             <input type="submit" value="Search">
+            <button type="button" onclick="window.location='add'" align="right">Add</button>
         </div>
     </form>
+
 </div>
 
 <table id="JackTable" class="table">
@@ -27,7 +29,7 @@
             <th>Building & Room Number</th>
             <th>Jack Number</th>
             <th>Jack Type</th> {% comment %} Or display name {% endcomment %}
-            <th>Caller ID</th>
+            <th>Name/Display Name</th>
             <th>Phone extension</th>
             <th class="text-right"></th>
         </tr>
@@ -36,19 +38,22 @@
         {% for p in jacks %} {% comment %} port isn't right object. Double-check and fix. {% endcomment %}
             <tr>
                 <td>
-                    <a href="{% url 'editjack' p.id %}">{{ p.buildingname }} {{ p.roomnumber }}</a>
+                    <a href="{% url 'editjack' p.id %}">{{ p.building_name }} {{ p.room_number }}</a>
                 </td>
                 <td>
-                    {{ p.portnumber }}
+                    {{ p.port_number }}
                 </td>
                 <td>
                     {{ p.type }}
                 </td>
                 <td>
-                    {{ p.callerid }}
+                    {{ p.display_name }}
                 </td>
                 <td>
                     {{ p.phone_extension }}
+                </td>
+                <td>
+                    <a href="{% url 'deletejack' p.id %}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         {% endfor %}

@@ -5,9 +5,10 @@ from .models import *
 # Register your models here.
 
 class JackInfoAdmin(admin.ModelAdmin):
-    list_display = ('buildingname', 'roomnumber', 'portnumber')
-    search_fields = ('buildingname', 'roomnumber', 'portnumber')
-    ordering = ('portnumber',)
+    list_display = ('building_name', 'room_number', 'port_number')
+    search_fields = ('building_name', 'room_number', 'port_number')
+    ordering = ('port_number',)
 
 admin.site.register(JackInfo, JackInfoAdmin)
-admin.site.register(Status)
+admin.site.register(BuildingName)
+admin.site.register(JackType)
