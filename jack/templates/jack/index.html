@@ -2,29 +2,12 @@
 {% load staticfiles %}
 {% block content %}
 
-{% comment %}
-<head>
-    <script type="text/javascript" src="/path/to/jquery-latest.js"></script> 
-<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
-</head>
-{% endcomment %}
+<link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+</link>
 
-<div id="toolbar">
-    <form id="changelist-search" method="GET">
-        <div>
-            <label for="searchbar">
-                {% comment %} Insert image here {% endcomment %}
-            </label>
-            <input type="text" size="40" name="q" id="searchBox" class="input-medium search-query" placeholder="Search" autofocus>
-            <input type="submit" value="Search">
-            <button type="button" onclick="window.location='add'" align="right">Add</button>
-        </div>
-    </form>
-</div>
-
-<table id="JackTable" class="table">
+<table id="JackTable" class="display">
     <thead>
-        <tr>
+        <tr class="noExl">
             <th>Building & Room Number</th>
             <th>Jack Number</th>
             <th>In Plate Type</th>
@@ -62,19 +45,20 @@
         {% endfor %}
     </tbody>
 </table>
-<div>
-    <p><button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
+
+<div title="buttons">
+    <p>    
+        <button type="button" onclick="window.location='add'" align="right">Add</button>
+        <button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
 </div>
 
 {% endblock %}
-{% comment %}
 {% block js %}
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
 <script type="text/javascript">
-$(document).ready(function()
-    {
-        $("#JackTable").tablesorter();
-    }
-);
+$(document).ready(function() {
+    $('#UserTable').DataTable();
+} );
 </script>
 {% endblock %}
-{% endcomment %}
