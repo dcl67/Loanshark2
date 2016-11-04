@@ -74,25 +74,31 @@ def DeleteJack(request, id):
 def DeleteConf(request):
     return HttpResponse("Are you sure you want to delete this jack?")
 
-def ExportCSV(request):
+def export_to_csv(request, qs, file_name):
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="jackinfotype.csv"'
+    response['Content-Disposition'] = 'attachment; filename="'+file_name+'".csv"'
     writer = csv.writer(response)
 
+    model = qs.model
+
     headers = []
-    for field in JackInfo._meta.get_fields(): # method._meta.get_fields()
+    for field in model._meta.get_fields(): # method._meta.get_fields()
         headers.append(field.name)
     writer.writerow(headers)
-    
-    for jack in JackInfo.objects.all(): # method.objects.all()
+
+    for obj in qs: # method.objects.all()
         row = []
         for field in headers:
-            val = getattr(jack, field)
+            val = getattr(obj, field)
             if callable(val):
                 val = val()
             if type(val) == unicode:
                 val = val.encode("utf-8")
             row.append(val)
         writer.writerow(row)
-        
+
     return response
+
+def ExportCSV(request):
+    qs = JackInfo.objects.all() # Model.objects.all
+    return export_to_csv(request, qs, "jackinfo") # "filename"
