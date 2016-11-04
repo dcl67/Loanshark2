@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, StreamingHttpResponse
 from django.urls import reverse
+from django.utils.six.moves import range
 from django.views.generic.edit import UpdateView
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
@@ -16,6 +17,22 @@ def index(request):
         'jacks': jacks,
     }
     return render(request, 'jack/index.html', context)
+
+#framework for creating search function
+def get_queryset(self):
+    result = super(JackListView, self).get_queryset()
+
+    query = self.request.GET.get('q')
+    if query:
+        query_list = query.split()
+        result = result.filter(
+            reduce(operator.and_, (Q(building_name__icontains=q) for q in query_list)) |
+            reduce(operator.and_, (Q(room_number__icontains=q) for q in query_list)) |
+            reduce(operator.and_, (Q(port_number__icontains=q) for q in query_list)) |
+            reduce(operator.and_, (Q(in_plate_type__icontains=q) for q in query_list)) |
+            reduce(operator.and_, (Q(type__icontains=q) for q in query_list)) |
+            reduce(operator.and_, (Q(display_name__icontains=q) for q in query_list)) |
+            reduce(operator.and_, (Q(phone_extension__icontains=q) for q in query_list)))
 """
 def landing_page(request):
     return HttpResponse("Welcome to CCI JackTracker. You're at the landing page. Type in http://127.0.0.1/jack/ to start tracking.'")
@@ -56,29 +73,26 @@ def DeleteJack(request, id):
 
 def DeleteConf(request):
     return HttpResponse("Are you sure you want to delete this jack?")
-"""
+
 def ExportCSV(request):
     response = HttpResponse(content_type='text/csv')
-    response['Jack_Info'] = 'attachment; filename="jacklist.csv"'
-    model = []
-    model = JackInfo.objects.all()
+    response['Content-Disposition'] = 'attachment; filename="jackinfotype.csv"'
     writer = csv.writer(response)
+
     headers = []
-
-    for field in JackInfo.objects.all():
-        headers.append(field)
+    for field in JackInfo._meta.get_fields(): # method._meta.get_fields()
+        headers.append(field.name)
     writer.writerow(headers)
-
-    for obj in model:
+    
+    for jack in JackInfo.objects.all(): # method.objects.all()
         row = []
         for field in headers:
-            val = getattr(obj, field)
+            val = getattr(jack, field)
             if callable(val):
                 val = val()
             if type(val) == unicode:
                 val = val.encode("utf-8")
             row.append(val)
         writer.writerow(row)
-
+        
     return response
-"""

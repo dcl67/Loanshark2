@@ -15,12 +15,11 @@
             <label for="searchbar">
                 {% comment %} Insert image here {% endcomment %}
             </label>
-            <input type="text" size="40" name="q" value id="searchbar" autofocus>
+            <input type="text" size="40" name="q" id="searchBox" class="input-medium search-query" placeholder="Search" autofocus>
             <input type="submit" value="Search">
             <button type="button" onclick="window.location='add'" align="right">Add</button>
         </div>
     </form>
-
 </div>
 
 <table id="JackTable" class="table">
@@ -63,6 +62,9 @@
         {% endfor %}
     </tbody>
 </table>
+<div>
+    <p><button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
+</div>
 
 {% endblock %}
 {% comment %}

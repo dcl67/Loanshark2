@@ -31,8 +31,7 @@ class JackInfo(models.Model):
     display_name = models.CharField(max_length=50, blank=True)
     phone_extension = models.CharField(max_length=10, blank=True)
 
-    def get_model_fields(model):
-        return model._meta.fields
+
 # class JackForm(ModelForm):
 # 	class Meta:
 # 		model = JackInfo
