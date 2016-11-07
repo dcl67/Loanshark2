@@ -11,14 +11,14 @@
             <th>Building & Room Number</th>
             <th>Jack Number</th>
             <th>In Plate Type</th>
-            <th>Jack Type</th> {% comment %} Or display name {% endcomment %}
+            <th>Jack Type</th>
             <th>Name/Display Name</th>
             <th>Phone extension</th>
             <th class="text-right"></th>
         </tr>
     </thead>
     <tbody>
-        {% for p in jacks %} {% comment %} port isn't right object. Double-check and fix. {% endcomment %}
+        {% for p in jacks %}
             <tr>
                 <td>
                     <a href="{% url 'editjack' p.id %}">{{ p.building_name }} {{ p.room_number }}</a>
@@ -39,7 +39,7 @@
                     {{ p.phone_extension }}
                 </td>
                 <td>
-                    <a href="{% url 'deletejack' p.id %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'deletejack' p.id %}" onclick="return confirm('Are you sure you want to delete this?')" class="btn btn-danger confirm-delete">Delete</a>
                 </td>
             </tr>
         {% endfor %}
@@ -58,7 +58,23 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#UserTable').DataTable();
+    $('#JackTable').DataTable();
 } );
+
+/*
+function popupFunction() {
+    var choice;
+    if (confirm("Are you sure that you want to delete this entry?") == true) {
+        choice = "Deleting entry.";
+    } else {
+        choice = "Cancelling.";
+    }
+    document.getElementById("choice").innerHTML = choice;
+}
+*/
+
 </script>
+
+
+
 {% endblock %}
