@@ -5,6 +5,12 @@
 <link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
 </link>
 
+<div title="buttons">
+    <p>    
+        <button type="button" onclick="window.location='add'" align="right">Add</button>
+        <button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
+</div>
+
 <table id="JackTable" class="display">
     <thead>
         <tr class="noExl">
@@ -14,6 +20,7 @@
             <th>Jack Type</th>
             <th>Name/Display Name</th>
             <th>Phone extension</th>
+            <th>Active</th>
             <th class="text-right"></th>
         </tr>
     </thead>
@@ -30,13 +37,16 @@
                     {{ p.in_plate_type }}
                 </td>
                 <td>
-                    {{ p.type }}
+                    {{ p.jack_type }}
                 </td>
                 <td>
                     {{ p.display_name }}
                 </td>
                 <td>
                     {{ p.phone_extension }}
+                </td>
+                <td>
+                    {{ p.active }}
                 </td>
                 <td>
                     <a href="{% url 'deletejack' p.id %}" onclick="return confirm('Are you sure you want to delete this?')" class="btn btn-danger confirm-delete">Delete</a>

@@ -10,10 +10,18 @@
 		<form method="POST" action="">
             {% csrf_token %}
             {{ form|crispy }}
-            <input type="submit" class="btn btn-default btn-raised btn-primary" value="Submit"/>
+            <input type="submit" onclick="mailto:dcl67@drexel.edu" class="btn btn-default btn-raised btn-primary" value="Send email"/>
             
         </form>
 	</div>
 </div>
 
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript"
+
+
+
+</script>
 {% endblock %}
