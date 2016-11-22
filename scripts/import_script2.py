@@ -9,10 +9,9 @@ def run():
     all_jacks = JackInfo.objects.all()
     all_jacks.delete()
     print'Importing your jack entries now...'
-    data_reader = csv.reader(open(file_path))#, delimiter=',', quotechar='"')
+    data_reader = csv.reader(open(file_path, 'rU'), dialect=csv.excel_tab, delimiter=',', quotechar='"')
     print'file loaded'
     count = 0
-    dumbass_headers = "Building,Room Number,Jack Number,Jack Type,Data Type,Active,Display Name,Phone Number"
     for row in data_reader:
         if row[0] != 'Building':
             count += 1

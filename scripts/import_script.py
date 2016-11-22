@@ -4,36 +4,23 @@ from jack.models import JackInfo, BuildingName, JackType, InPlateType, Active
 
 file_path = '/Users/dannylopez/repos/JackTracking/scripts/files/'
 
-jack_file = "TestExcel.csv"
+jack_file = "JackInventory.csv"
 
 def run():
-    print'Removing current entries'
     all_jacks = JackInfo.objects.all()
     all_jacks.delete()
-    print'Importing your jack entries now...'
-    data_reader = csv.reader(open(file_path+jack_file), dialect='excel', delimiter=',')
-    print'file loaded'
+    data_reader = csv.reader(open(file_path+jack_file, 'rU'), dialect=csv.excel_tab, delimiter=',', quotechar='"')
     count = 0
-    print'count initialized'
     for row in data_reader:
-        print'for loop'
         if row[0] != 'Building':
-            print'if statement'
             count += 1
             building_name = BuildingName.objects.get_or_create(name=row[0])
-            print'building name'
             rm_num = row[1]
-            print'room number'
             prt_num = row[2]
-            print'port number'
             plate_type = InPlateType.objects.get_or_create(name=row[3])
-            print'plate type'
             jk_type = JackType.objects.get_or_create(name=row[4])
-            print'jack type'
             display_name = row[6]
-            print'display name'
             phone_extension = row[7]
-            print'phone extension'
             active = Active.objects.get_or_create(name=row[5])
             print(building_name)
             print(rm_num)
