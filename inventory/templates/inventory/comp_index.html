@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+</link>
+<div title="nav-label">
+    <label>Navigation:</label>
+</div>
+<div title="navigation">
+    <a href="/" data-toggle="tooltip" data-placement="bottom" id="home-href">Home</a> | 
+    <a href="/inventory/index/computers/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Computer</a> | 
+    <a href="/inventory/index/display/" data-toggle="tooltip" data-placement="bottom" id="display-href">Display</a> | 
+    <a href="/inventory/index/camera/" data-toggle="tooltip" data-placement="bottom" id="camera-href">Camera</a> | 
+    <a href="/inventory/index/printer/" data-toggle="tooltip" data-placement="bottom" id="printer-href">Printer</a> | 
+    <a href="/inventory/index/projector/" data-toggle="tooltip" data-placement="bottom" id="display-href">Projector</a>
+</div>
+<br/>
+<div title="buttons">
+    <p>    
+        <button type="button" onclick="window.location.href='/inventory/index/computers/create/'" align="right">Add</button>
+        <button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
+</div>
+
+<table id="ComputerTable" class="display">
+    <thead>
+        <tr class="noExl">
+            <th>Name</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Issued to</th>
+            <th>Owner</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in computers %}
+            <tr>
+                <td>
+                    <a href="{% url 'computer_detail' c.id %}" data-toggle="tooltip" data-placement="bottom" id="computer-detail">{{ c.name }}</a>
+                </td>
+                <td>
+                    {{ c.make }}
+                </td>
+                <td>
+                    {{ c.model }}
+                </td>
+                <td>
+                    {{ c.issued_to }}
+                </td>
+                <td>
+                    {{ c.owner }}
+                </td>
+                <td>
+                    {{ c.building_location.name }} {{ c.room_location.name }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div title="buttons">
+    <p>    
+        <button type="button" onclick="window.location.href='/inventory/index/computers/create/'" align="right">Add</button>
+        <button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
+</div>
+
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#ComputerTable').DataTable();
+} );
+
+/*
+function popupFunction() {
+    var choice;
+    if (confirm("Are you sure that you want to delete this entry?") == true) {
+        choice = "Deleting entry.";
+    } else {
+        choice = "Cancelling.";
+    }
+    document.getElementById("choice").innerHTML = choice;
+}
+*/
+
+</script>
+
+
+
+{% endblock %}

@@ -21,7 +21,8 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^jack/', include('jack.urls'))
+    url(r'^jack/', include('jack.urls')),
+    url(r'^inventory/', include('inventory.urls'))
 ]
 
 if settings.DEBUG:

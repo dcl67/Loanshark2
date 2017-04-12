@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 
-from .views import AddJack, DeleteJack, EditJackInfo, index, ExportCSV, SwapView
+from .views import *
 
 urlpatterns = (
     # url(r'^$', landing_page, name='') home page?

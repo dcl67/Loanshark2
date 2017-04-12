@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style type="text/css">
+.remove-btn{
+    padding-top: 30px;
+    cursor: pointer;
+    color: #E91E63;
+    float: left;
+}
+.main{
+    background: #CCCCCF;
+}
+
+.right {
+    float: right;
+}
+
+.blank-card {
+    background-color: #444444;
+    color: #FFFFFF;
+}
+
+.checkbox label, .radio label, label {
+    font-size: 17px;
+    line-height: 1.42857;
+    color: #000000;
+    font-weight: 400;
+}
+
+label.control-label{
+    font-size: 17px !important;
+}
+#sub-wrapper, #equiptment-wrapper{
+    display: none;
+}
+.sidebar-nav-fixed {
+    width:14%;
+}
+
+/*validation*/
+input:required:invalid, input:focus:invalid {
+  /* insert your own styles for invalid form input */
+  -moz-box-shadow: none;
+}
+
+input:required:valid {
+  /* insert your own styles for valid form input */
+}
+
+:valid {
+    color: green;
+} 
+:invalid {
+    color: red;
+} 
+</style>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <div>
+            {% csrf_token %}
+            <div class="card card-raised">
+                <div class="content">
+
+                    <p><label>Name:</label> {{ object.name }}</p>
+                    <p><label>MAC Address:</label>{{ object.mac_address }}</p>
+                    <p><label>Issued to:</label>{{ object.issued_to }}</p>
+                    <p><label>Owner:</label>{{ object.owner }}</p>
+                    <p><label>IP Address:</label>{{ object.ip }}</p>
+                    <p><label>ID:</label>{{ object.f_id }}</p>
+                    <p><label>Create Date:</label>{{ object.create_date }}</p>
+                    <p><label>Modified date:</label>{{ object.modified_date }}</p>
+                    <p><label>Purchase Type:</label>{{ object.purchase_type }}</p>
+                    <p><label>Warranty Type:</label>{{ object.warranty_type }}</p>
+                    <p><label>Notes:</label>{{ object.notes }}</p>
+                    <p><label>Building Location:</label>{{ object.building_location }}</p>
+                    <p><label>Room Location:</label>{{ object.room_location }}</p>
+                    <p><label>Status:</label>{{ object.status }}</p>
+                    <p><label>Make:</label>{{ object.make }}</p>
+                    <p><label>Model:</label>{{ object.model }}</p>
+                    <p><label>Video Inputs:</label>{{ object.video_inputs }}</p>
+
+                </div>
+            </div>
+    </div>
+</div>
+
+{% endblock %}

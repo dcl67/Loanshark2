@@ -2,52 +2,71 @@ from __future__ import unicode_literals
 from django.db import models
 from django.forms import ModelForm
 
+from location.models import L_Room, L_Building
+
 # Create your models here.
 
-class BuildingName(models.Model):
-    name = models.CharField(max_length=50, blank=False)
+class Building(models.Model):
+    name = models.CharField(max_length=150, blank=True, null=True)
+    description = models.CharField(max_length=150, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+class Room(models.Model):
+    number = models.CharField(max_length=100, blank=True, null=True)
+    building = models.ForeignKey('location.L_Building', related_name='none', blank=True, null=True)
+
+    def __str__(self):
+        return self.number
+
 
 class JackType(models.Model):
-    name = models.CharField(max_length=50, blank=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
-class InPlateType(models.Model):
-    name = models.CharField(max_length=50, blank=True)
+
+class WallplatePort(models.Model):
+    """Jack position in the wall plate"""
+    number = models.CharField(max_length=5, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.number
 
-class Active(models.Model):
-    name = models.CharField(max_length=3, blank=True)
+    class Meta:
+        ordering = ['number']
 
-    def __str__(self):
-        return self.name
 
-class JackInfo(models.Model):
-    building_name = models.ForeignKey('BuildingName', related_name='building_name', blank=True, null=True)
-    room_number = models.CharField(max_length=100, blank=True, null=True)
-    port_number = models.CharField(max_length=100, blank=True, null=True)
-    in_plate_type = models.ForeignKey('InPlateType', related_name='in_plate_type', blank=True, null=True)
-    jack_type = models.ForeignKey('JackType', related_name='jack_type', blank=True, null=True)
+class Jack(models.Model):
+    wallplateport = models.ForeignKey('WallplatePort', blank=True, null=True) # 1,2,3,4
+    #in_plate_type = models.ForeignKey('InPlateType', related_name='in_plate_type', blank=True, null=True)
+    jack_data_type = models.ForeignKey('JackType', related_name='jack_type', blank=True, null=True)
     display_name = models.CharField(max_length=100, blank=True, null=True)
     phone_extension = models.CharField(max_length=100, blank=True, null=True)
-    active = models.ForeignKey('Active', related_name='active', blank=True, null=True)
+    port_status = models.ForeignKey('Status', related_name='active', blank=True, null=True)
+    #can this information be pulled from the other corresponsing models?
+    #building = models.ForeignKey('Building', related_name='jack_building', blank=True, null=True)
+    #room = models.ForeignKey('Room', related_name='jack_room', blank=True, null=True)
+    plate_number = models.ForeignKey('Plate', related_name='jack_plate', blank=True, null=True) #101082 plate
 
-class SwapModel(models.Model):
-    first_building = models.ForeignKey('BuildingName', related_name='+')
-    first_room = models.CharField(max_length=10, blank=False)
-    first_number = models.CharField(max_length=10, blank=False)
-    first_extension = models.CharField(max_length=10, blank=False)
+    def __str__(self):
+        return self.plate_number.number + "-" + self.wallplateport.number + ' belonging to ' + self.display_name + ': ' + self.port_status.name
 
-    second_building = models.ForeignKey('BuildingName', related_name='+')
-    second_room = models.CharField(max_length=10, blank=False)
-    second_number = models.CharField(max_length=10, blank=False)
-    second_extension = models.CharField(max_length=10, blank=False)
 
-# class CreateJack(models.Model):
-#     JackInfo.objects.create()
+class Plate(models.Model):
+    number = models.CharField(max_length=50, blank=True, null=True)
+    building = models.ForeignKey('location.L_Building', related_name='foreignkey_buildig', blank=True, null=True)
+    room = models.ForeignKey('location.L_Room', related_name='foreignkey_room', blank=True, null=True)
+    jack = models.ManyToManyField(Jack)
+
+    def __str__(self):
+        return self.number
+
+
+class Status(models.Model):
+    name = models.CharField(max_length=20, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
