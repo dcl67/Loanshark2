@@ -25,8 +25,9 @@ SECRET_KEY = 'igqtfe(8avrr&vehq!d%z__k8n$)67+kycw6odul)tb!a*i-e='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+INTERNAL_IPS = ('127.0.0.1')
 
 # Application definition
 
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     'location',
     'inventory',
     'rental',
-    
     'debug_toolbar',
     'crispy_forms',
     'jack',
@@ -54,11 +54,11 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'JackTracking.urls'

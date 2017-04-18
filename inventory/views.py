@@ -26,14 +26,41 @@ class computer_detail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(computer_detail, self).get_context_data(**kwargs)
         return context
-    
 
-class computerCreate(CreateView):
+class device_create(CreateView):
+    model = Device
+    fields = []
+    template_name='inventory/'
+
+class ComputerCreate(CreateView):
     model = Computer
-    fields = ['name']
+    fields = ['name','mac_address','issued_to','owner','ip','f_id',
+        'purchase_type', 'warranty_type','notes','building_location',
+        'room_location','status', 'make', 'model', 'processor', 'computer_type', 'hostname']
+    template_name='inventory/edit.html'
 
     #for mac_address in form.cleaned_data['mac_address']:
-        
+def computer_create(request):
+    instance = get_object_or_404(Computer)
+    form = ComputerForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        name = form.cleaned_data['name']
+        mac_address = form.cleaned_data['mac_address']
+        issued_to = form.cleaned_data['issued_to']
+        owner = form.cleaned_data['owner']
+        ip = form.cleaned_data['ip']
+        f_id = form.cleaned_data['f_id']
+        create_date = form.cleaned_data['create_date']
+        modified_date = form.cleaned_data['modified_date']
+        purchase_type = form.cleaned_data['purchase_type']
+        warranty_type = form.cleaned_data['warranty_type']
+        notes = form.cleaned_data['notes']
+        building_location = form.cleaned_data['building_location']
+        room_location = form.cleaned_data['room_location']
+        status = form.cleaned_data['status']
+        form.save()
+        return HttpResponseRedirect(reverse('computer_detail', kwargs={'pk':pk}))
+    return render(request, 'inventory/edit.html', {'form':form})
 
 
 def computer_edit(request, pk):
@@ -77,7 +104,7 @@ class display_detail(DetailView):
 
 
 class display_create(CreateView, DetailView):
-    model = Computer
+    model = Display
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
         'purchase_type', 'warranty_type','notes','building_location',
         'room_location','status','resolution','video_inputs']
@@ -132,7 +159,7 @@ class printer_detail(DetailView):
 
 
 class printer_create(CreateView):
-    model = Computer
+    model = Printer
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
         'purchase_type', 'warranty_type','notes','building_location',
         'room_location','status','hostname','toner']
@@ -181,7 +208,7 @@ class projector_detail(DetailView):
 
 
 class projector_create(CreateView):
-    model = Computer
+    model = Projector
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
         'purchase_type', 'warranty_type','notes','building_location',
         'room_location','status','make','model','video_inputs']
@@ -230,7 +257,7 @@ class camera_detail(DetailView):
 
 
 class camera_create(CreateView):
-    model = Computer
+    model = Camera
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
         'purchase_type', 'warranty_type','notes','building_location',
         'room_location','status','make','model']
@@ -278,7 +305,7 @@ class appliance_detail(DetailView):
 
 
 class appliance_create(CreateView):
-    model = Computer
+    model = Appliance
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
         'purchase_type', 'warranty_type','notes','building_location',
         'room_location','status','resolution','video_inputs']
@@ -325,7 +352,7 @@ class hardware_detail(DetailView):
 
 
 class hardware_create(CreateView):
-    model = Computer
+    model = Misc_Hardware
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
         'purchase_type', 'warranty_type','notes','building_location',
         'room_location','status','hardware_name']

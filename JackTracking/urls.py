@@ -18,15 +18,17 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
+import debug_toolbar
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^jack/', include('jack.urls')),
-    url(r'^inventory/', include('inventory.urls'))
+    url(r'^inventory/', include('inventory.urls')),
+    url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
 
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]
+# if settings.DEBUG:
+#     import debug_toolbar
+#     urlpatterns = [
+#         url(r'^__debug__/', include(debug_toolbar.urls)),
+#     ] + urlpatterns

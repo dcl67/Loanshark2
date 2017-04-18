@@ -156,3 +156,7 @@ class Input(models.Model):
 
     def __str__(self):
         return self.video_input
+
+class Licenses(models.Model):
+    software_name = models.CharField(max_length=200, blank=True, null=True)
+    product_key = models.CharField(max_length=100, blank=True, null=True)
