@@ -21,9 +21,11 @@ from django.conf import settings
 import debug_toolbar
 
 urlpatterns = [
+    url(r'^', include('home.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^jack/', include('jack.urls')),
     url(r'^inventory/', include('inventory.urls')),
+    url(r'^home/', include('home.urls')),
     url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
 

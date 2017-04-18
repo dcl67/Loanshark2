@@ -1,0 +1,56 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block content %} 
+<style>
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background:#6cf;
+}
+#p{
+text-align: center
+}
+#body{
+background-color:yellow
+}
+</style>
+
+<head>
+
+Welcome home.
+
+<link rel="stylesheet" type="text/css" href="movie.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css"> 
+<title>Movie Knight</title> 
+
+</head>
+<body bgcolor="#FFFFFF">
+
+<div id="p">
+<p style="font-family:Verdana;color:black;font-size:50px">Loanshark</p>
+Insert an image down below, here:
+<p><div class="imgcontainer">
+    <center> <img src="{% static "/logo.jpg" %}" alt="Avatar" class="avatar"> </center>
+  </div>
+</p><br/>
+
+  <center>
+<form action="/action_page.php">
+  Username:
+  <input type="text" name="Username">
+  <br>
+  Password:
+  <input type="password" name="Password">
+  <br>
+  <a href="/" class="btn" type="submit" value="Submit">Submit</a>
+</form>
+
+</center>
+</div>
+</body>
+</div>
+
+{% endblock %}
