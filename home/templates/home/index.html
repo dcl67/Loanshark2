@@ -1,7 +1,56 @@
 {% extends "base.html" %} 
 {% load static %}
-
 {% block content %} 
+
+<style>
+.input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 30%;
+}
+</style>
+
+{% if request.user.is_authenticated %}
+
+<body bgcolor="#FFFFFF">
+
+    <center>
+        <div id="p">
+            Insert an image down below, here:
+            <p><div class="imgcontainer">
+                <center> <img src="{% static "/logo.jpg" %}" alt="Avatar" class="avatar"> </center>
+            </div></p>
+            <br>
+            <p style="font-family:Verdana;color:black;font-size:25px">Welcome to</p>
+            <p style="font-family:Verdana;color:black;font-size:25px">Loanshark</p>
+
+                <p style="padding-top: 10px; font-family:Verdana;color:black;font-size:19px">What are you searching for today?</p>
+                <br>
+                <p><input type="text" name="search" placeholder="Search.." ></p>
+                <br>
+                <a href="/inventory/index/computers/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Computer</a> | 
+                <a href="/inventory/index/display/" data-toggle="tooltip" data-placement="bottom" id="display-href">Display</a> | 
+                <a href="/inventory/index/camera/" data-toggle="tooltip" data-placement="bottom" id="camera-href">Camera</a> | 
+                <a href="/inventory/index/printer/" data-toggle="tooltip" data-placement="bottom" id="printer-href">Printer</a> | 
+                <a href="/inventory/index/projector/" data-toggle="tooltip" data-placement="bottom" id="display-href">Projector</a>
+            </div>
+            <br/>
+        </div>
+    </center>
+
+{% else %}
+
+{% comment %}
+===================================
+======= Not authenticated =========
+===================================
+{% endcomment %}
+
 <style>
 #footer {
    position:absolute;
@@ -20,37 +69,36 @@ background-color:yellow
 
 <head>
 
-Welcome home.
-
-<link rel="stylesheet" type="text/css" href="movie.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css"> 
-<title>Movie Knight</title> 
+    <link rel="stylesheet" type="text/css" href="movie.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css"> 
+    <title>Loanshark Authentication</title> 
 
 </head>
 <body bgcolor="#FFFFFF">
 
-<div id="p">
-<p style="font-family:Verdana;color:black;font-size:50px">Loanshark</p>
-Insert an image down below, here:
-<p><div class="imgcontainer">
-    <center> <img src="{% static "/logo.jpg" %}" alt="Avatar" class="avatar"> </center>
-  </div>
-</p><br/>
+    <div id="p">
+        <p style="font-family:Verdana;color:black;font-size:50px">Loanshark</p>
+        Insert an image down below, here:
+            <p><div class="imgcontainer">
+                <center> <img src="{% static "/logo.jpg" %}" alt="Avatar" class="avatar"> </center>
+            </div>
+            </p><br/>
 
-  <center>
-<form action="/action_page.php">
-  Username:
-  <input type="text" name="Username">
-  <br>
-  Password:
-  <input type="password" name="Password">
-  <br>
-  <a href="/" class="btn" type="submit" value="Submit">Submit</a>
-</form>
+        <center>
+            <form action="/action_page.php">
+            Username:
+            <input type="text" name="Username">
+            <br>
+            Password:
+            <input type="password" name="Password">
+            <br>
+            <a href="/" class="btn" type="submit" value="Submit">Submit</a>
+            </form>
 
-</center>
-</div>
+        </center>
+    </div>
 </body>
 </div>
+{% endif %}
 
 {% endblock %}

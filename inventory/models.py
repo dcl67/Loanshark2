@@ -47,6 +47,8 @@ class Device(models.Model):
     modified_date = models.DateTimeField(auto_now=True, blank=True, null=True)
     purchase_type = models.ForeignKey('PurchaseType', blank=True, null=True)
     warranty_type = models.ForeignKey('WarrantyType', blank=True, null=True)
+    warranty_purchase_date = models.DateField()
+    warranty_expiration_date = models.DateField()
     notes = models.TextField(blank=True, null=True)
     building_location = models.ForeignKey('location.L_Building', blank=True, null=True)
     room_location = models.ForeignKey('location.L_Room', blank=True, null=True)
@@ -93,8 +95,6 @@ class PurchaseType(models.Model):
 
 class WarrantyType(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
-    purchase_date = models.DateField()
-    expiration_date = models.DateField()
 
     def __str__(self):
         return self.name

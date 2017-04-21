@@ -5,12 +5,14 @@ from django.utils.six.moves import range
 from django.views.generic.edit import UpdateView
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from django.contrib.auth.decorators import login_required
 import csv
 
 from .models import *
 from .forms import *
 
 # View for the jack information
+@login_required
 def index(request):
     building = Building.objects.all()
     room = Room.objects.all()
