@@ -27,32 +27,18 @@
 <table id="ComputerTable" class="display">
     <thead>
         <tr class="noExl">
-            <th></th>
+            <th>Name</th>
+            <th>Location</th>
         </tr>
     </thead>
     <tbody>
-        {% for h in hardware %}
+        {% for h in hardwares %}
             <tr>
                 <td>
-
+                    <a href="{% url 'hardware_detail' h.id %}" data-toggle="tooltip" data-placement="bottom" id="hardware-detail">{{ h.hardware_name }}</a>
                 </td>
                 <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
+                    {{ h.building_location.name }} {{ h.room_location.name }}
                 </td>
             </tr>
         {% endfor %}
