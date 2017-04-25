@@ -27,32 +27,30 @@
 <table id="ComputerTable" class="display">
     <thead>
         <tr class="noExl">
-            <th></th>
+            <th>Name</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Video Inputs</th>
+            <th>Location</th>
         </tr>
     </thead>
     <tbody>
         {% for p in projectors %}
             <tr>
                 <td>
-
+                    <a href="{% url 'projector_detail' p.id %}" data-toggle="tooltip" data-placement="bottom" id="projector-detail">{{ p.name }}</a>
                 </td>
                 <td>
-
+                    {{ p.make }}
                 </td>
                 <td>
-
+                    {{ p.model }}
                 </td>
                 <td>
-
+                    {{ p.video_inputs }}
                 </td>
                 <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
+                    {{ p.building_location.name }} {{ p.room_location.name }}
                 </td>
             </tr>
         {% endfor %}

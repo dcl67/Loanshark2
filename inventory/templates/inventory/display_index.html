@@ -27,32 +27,34 @@
 <table id="ComputerTable" class="display">
     <thead>
         <tr class="noExl">
-            <th></th>
+            <th>Name</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Resolution</th>
+            <th>Video Inputs</th>
+            <th>Location</th>
         </tr>
     </thead>
     <tbody>
         {% for d in displays %}
             <tr>
                 <td>
-
+                    <a href="{% url 'display_detail' d.id %}" data-toggle="tooltip" data-placement="bottom" id="display-detail">{{ d.name }}</a>
                 </td>
                 <td>
-
+                    {{ d.make }}
                 </td>
                 <td>
-
+                    {{ d.model }}
                 </td>
                 <td>
-
+                    {{ d.resolution }}
                 </td>
                 <td>
-
+                    {{ d.video_inputs }}
                 </td>
                 <td>
-
-                </td>
-                <td>
-
+                    {{ d.building_location.name }} {{ d.room_location.name }}
                 </td>
             </tr>
         {% endfor %}
