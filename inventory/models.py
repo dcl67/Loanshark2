@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 
 class Active(models.Model):
@@ -47,8 +48,8 @@ class Device(models.Model):
     modified_date = models.DateTimeField(auto_now=True, blank=True, null=True)
     purchase_type = models.ForeignKey('PurchaseType', blank=True, null=True)
     warranty_type = models.ForeignKey('WarrantyType', blank=True, null=True)
-    warranty_purchase_date = models.DateField()
-    warranty_expiration_date = models.DateField()
+    warranty_purchase_date = models.DateField(blank=True, null=True)
+    warranty_expiration_date = models.DateField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     building_location = models.ForeignKey('location.L_Building', blank=True, null=True)
     room_location = models.ForeignKey('location.L_Room', blank=True, null=True)
@@ -85,7 +86,7 @@ class Toner(models.Model):
     color = models.ManyToManyField(Color)
 
     def __str__(self):
-        return self.make + ' ' + self.model + '-- total: ' + self.count
+        return self.make + ' ' + self.model
 
 class PurchaseType(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
@@ -140,10 +141,10 @@ class Camera(Device):
 
 
 class Appliance(Device): # examples are Echo360, ClearOne, AV Equipment, etc...
-    applicance_name = models.CharField(max_length=300, blank=True, null=True)
+    appliance_name = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.appliance_name
 
 class Misc_Hardware(Device): # examples are dongles,chargers, etc
     hardware_name = models.CharField(max_length=300, blank=True, null=True)
