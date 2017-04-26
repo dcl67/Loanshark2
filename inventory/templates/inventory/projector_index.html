@@ -10,11 +10,13 @@
 </div>
 <div title="navigation">
     <a href="/" data-toggle="tooltip" data-placement="bottom" id="home-href">Home</a> | 
-    <a href="/inventory/index/computers/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Computer</a> | 
-    <a href="/inventory/index/display/" data-toggle="tooltip" data-placement="bottom" id="display-href">Display</a> | 
-    <a href="/inventory/index/camera/" data-toggle="tooltip" data-placement="bottom" id="camera-href">Camera</a> | 
-    <a href="/inventory/index/printer/" data-toggle="tooltip" data-placement="bottom" id="printer-href">Printer</a> | 
-    <a href="/inventory/index/projector/" data-toggle="tooltip" data-placement="bottom" id="display-href">Projector</a>
+                <a href="/inventory/index/computers/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Computer</a> | 
+                <a href="/inventory/index/display/" data-toggle="tooltip" data-placement="bottom" id="display-href">Display</a> | 
+                <a href="/inventory/index/camera/" data-toggle="tooltip" data-placement="bottom" id="camera-href">Camera</a> | 
+                <a href="/inventory/index/printer/" data-toggle="tooltip" data-placement="bottom" id="printer-href">Printer</a> | 
+                <a href="/inventory/index/projector/" data-toggle="tooltip" data-placement="bottom" id="projector-href">Projector</a> | 
+                <a href="/inventory/index/appliance/" data-toggle="tooltip" data-placement="bottom" id="appliance-href">Appliances</a> | 
+                <a href="/inventory/index/hardware/" data-toggle="tooltip" data-placement="bottom" id="hardware-href">Other Hardware</a>
 </div>
 <br/>
 
@@ -39,6 +41,7 @@
             <tr>
                 <td>
                     <a href="{% url 'projector_detail' p.id %}" data-toggle="tooltip" data-placement="bottom" id="projector-detail">{{ p.name }}</a>
+<<<<<<< 2d0817472e2df8ef52b6a88585f032caf793022d
                 </td>
                 <td>
                     {{ p.make }}
@@ -50,6 +53,19 @@
                     {{ p.video_inputs }}
                 </td>
                 <td>
+=======
+                </td>
+                <td>
+                    {{ p.make }}
+                </td>
+                <td>
+                    {{ p.model }}
+                </td>
+                <td>
+                    {{ p.video_inputs }}
+                </td>
+                <td>
+>>>>>>> Front-end changes + Kristen changes implemented
                     {{ p.building_location.name }} {{ p.room_location.name }}
                 </td>
             </tr>
