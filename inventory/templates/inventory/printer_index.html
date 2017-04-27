@@ -5,8 +5,7 @@
 <link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
 </link>
 
-<<<<<<< 2d0817472e2df8ef52b6a88585f032caf793022d
-=======
+
 <div title="nav-label">
     <label>Navigation:</label>
 </div>
@@ -23,7 +22,6 @@
 </div>
 <br/>
 
->>>>>>> Front-end changes + Kristen changes implemented
 <div title="buttons">
     <p>    
         <button type="button" onclick="window.location='add'" align="right">Add</button>
@@ -45,7 +43,6 @@
         {% for p in printers %}
             <tr>
                 <td>
-<<<<<<< 2d0817472e2df8ef52b6a88585f032caf793022d
                     <a href="{% url 'projector_detail' p.id %}" data-toggle="tooltip" data-placement="bottom" id="projector-detail">{{ p.name }}</a>
                 </td>
                 <td>
@@ -61,7 +58,6 @@
                     {{ p.toner }}
                 </td>
                 <td>
-=======
                     <a href="{% url 'printer_detail' p.id %}" data-toggle="tooltip" data-placement="bottom" id="printer-detail">{{ p.name }}</a>
                 </td>
                 <td>
@@ -77,7 +73,6 @@
                     {{ p.toner }}
                 </td>
                 <td>
->>>>>>> Front-end changes + Kristen changes implemented
                     {{ p.building_location.name }} {{ p.room_location.name }}
                 </td>
             </tr>

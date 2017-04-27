@@ -40,11 +40,7 @@
                     <a href="{% url 'appliance_detail' a.id %}" data-toggle="tooltip" data-placement="bottom" id="appliance-detail">{{ a.appliance_name }}</a>
                 </td>
                 <td>
-<<<<<<< 2d0817472e2df8ef52b6a88585f032caf793022d
-                    {{ c.building_location.name }} {{ c.room_location.name }}
-=======
                     {{ a.building_location.name }} {{ a.room_location.name }}
->>>>>>> Front-end changes + Kristen changes implemented
                 </td>
             </tr>
         {% endfor %}
