@@ -10,7 +10,7 @@
     float: left;
 }
 .main{
-    background: #CCCCCF;
+    background: #F4F4F4;
 }
 
 .right {
@@ -77,7 +77,7 @@ input:required:valid {
     <div>
             {% csrf_token %}
             <div class="card card-raised">
-                <div class="content">
+                <div class="content" style="background-color:#FFFFFF;">
 
                     <p><label>Name:</label> {{ object.name }}</p>
                     <p><label>MAC Address:</label>{{ object.mac_address }}</p>
@@ -96,6 +96,12 @@ input:required:valid {
                     <p><label>Make:</label>{{ object.make }}</p>
                     <p><label>Model:</label>{{ object.model }}</p>
                     <p><label>Video Inputs:</label>{{ object.video_inputs }}</p>
+
+                    <div title="navigation">
+                        | <label><a href="{% url 'projector_edit' object.id %}" data-toggle="tooltip" data-placement="bottom" id="computer-update">Edit</a></label> | 
+                        <label><a href="#" data-toggle="tooltip" data-placement="bottom" id="computer-print">Print</a></label> | 
+                        <label><a href="{% url 'projector_index' %}" data-toggle="tooltip" data-placement="bottom" id="back">Back to list</a></label> |
+                    </div>
 
                 </div>
             </div>

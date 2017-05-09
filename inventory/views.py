@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -35,13 +36,36 @@ class device_create(CreateView):
 class ComputerCreate(CreateView):
     model = Computer
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
-        'purchase_type', 'warranty_type','notes','building_location',
-        'room_location','status', 'make', 'model', 'processor', 'computer_type', 'hostname']
+        'purchase_type', 'warranty_type','notes','building_location', 
+        'room_location', 'warranty_purchase_date', 'warranty_expiration_date',
+        'status', 'make', 'model', 'processor', 'computer_type', 'hostname']
     template_name='inventory/edit.html'
 
     #for mac_address in form.cleaned_data['mac_address']:
 def computer_create(request):
-    instance = get_object_or_404(Computer)
+    if request.method == 'POST':
+        c = Computer()
+        c.name = form.cleaned_data['name']
+        c.mac_address = form.cleaned_data['mac_address']
+        c.issued_to = form.cleaned_data['issued_to']
+        c.owner = form.cleaned_data['owner']
+        c.ip = form.cleaned_data['ip']
+        c.f_id = form.cleaned_data['f_id']
+        #c.create_date = form.cleaned_data['create_date']
+        #c.modified_date = form.cleaned_data['modified_date']
+        c.purchase_type = form.cleaned_data['purchase_type']
+        c.warranty_type = form.cleaned_data['warranty_type']
+        c.notes = form.cleaned_data['notes']
+        c.building_location = form.cleaned_data['building_location']
+        c.room_location = form.cleaned_data['room_location']
+        c.status = form.cleaned_data['status']
+        c.save()
+
+    return HttpResponseRedirect(reverse('computer_detail'))
+    #return render(request, 'inventory/edit.html', {'form':form})
+
+    """
+    instance = Computer.objects.get(Computer)
     form = ComputerForm(request.POST or None, instance=instance)
     if form.is_valid():
         name = form.cleaned_data['name']
@@ -61,6 +85,7 @@ def computer_create(request):
         form.save()
         return HttpResponseRedirect(reverse('computer_detail', kwargs={'pk':pk}))
     return render(request, 'inventory/edit.html', {'form':form})
+    """
 
 
 def computer_edit(request, pk):
@@ -73,8 +98,8 @@ def computer_edit(request, pk):
         owner = form.cleaned_data['owner']
         ip = form.cleaned_data['ip']
         f_id = form.cleaned_data['f_id']
-        create_date = form.cleaned_data['create_date']
-        modified_date = form.cleaned_data['modified_date']
+        #create_date = form.cleaned_data['create_date']
+        #modified_date = form.cleaned_data['modified_date']
         purchase_type = form.cleaned_data['purchase_type']
         warranty_type = form.cleaned_data['warranty_type']
         notes = form.cleaned_data['notes']
@@ -103,11 +128,13 @@ class display_detail(DetailView):
         return context
 
 
-class display_create(CreateView, DetailView):
+class display_create(CreateView):
     model = Display
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
-        'purchase_type', 'warranty_type','notes','building_location',
-        'room_location','status','resolution','video_inputs']
+        'purchase_type', 'warranty_type','notes','building_location', 
+        'room_location', 'warranty_purchase_date', 'warranty_expiration_date',
+        'status', 'resolution', 'video_inputs']
+    template_name='inventory/edit.html'
 
 
 class display_update(UpdateView, DetailView):
@@ -126,8 +153,8 @@ def display_edit(request, pk):
         owner = form.cleaned_data['owner']
         ip = form.cleaned_data['ip']
         f_id = form.cleaned_data['f_id']
-        create_date = form.cleaned_data['create_date']
-        modified_date = form.cleaned_data['modified_date']
+        #create_date = form.cleaned_data['create_date']
+        #modified_date = form.cleaned_data['modified_date']
         purchase_type = form.cleaned_data['purchase_type']
         warranty_type = form.cleaned_data['warranty_type']
         notes = form.cleaned_data['notes']
@@ -161,8 +188,10 @@ class printer_detail(DetailView):
 class printer_create(CreateView):
     model = Printer
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
-        'purchase_type', 'warranty_type','notes','building_location',
-        'room_location','status','hostname','toner']
+        'purchase_type', 'warranty_type','notes','building_location', 
+        'room_location', 'warranty_purchase_date', 'warranty_expiration_date',
+        'status', 'hostname', 'make', 'model', 'toner']
+    template_name='inventory/edit.html'
 
 
 def printer_edit(request, pk):
@@ -175,8 +204,8 @@ def printer_edit(request, pk):
         owner = form.cleaned_data['owner']
         ip = form.cleaned_data['ip']
         f_id = form.cleaned_data['f_id']
-        create_date = form.cleaned_data['create_date']
-        modified_date = form.cleaned_data['modified_date']
+        #create_date = form.cleaned_data['create_date']
+        #modified_date = form.cleaned_data['modified_date']
         purchase_type = form.cleaned_data['purchase_type']
         warranty_type = form.cleaned_data['warranty_type']
         notes = form.cleaned_data['notes']
@@ -184,6 +213,8 @@ def printer_edit(request, pk):
         room_location = form.cleaned_data['room_location']
         status = form.cleaned_data['status']
         hostname = form.cleaned_data['hostname']
+        make = form.cleaned_data['make']
+        model = form.cleaned_data['model']
         toner = form.cleaned_data['toner']
         form.save()
         return HttpResponseRedirect(reverse('printer_detail', kwargs={'pk':pk}))
@@ -210,9 +241,10 @@ class projector_detail(DetailView):
 class projector_create(CreateView):
     model = Projector
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
-        'purchase_type', 'warranty_type','notes','building_location',
-        'room_location','status','make','model','video_inputs']
-
+        'purchase_type', 'warranty_type','notes','building_location', 
+        'room_location', 'warranty_purchase_date', 'warranty_expiration_date',
+        'status', 'make', 'model', 'video_inputs']
+    template_name='inventory/edit.html'
 
 def projector_edit(request, pk):
     instance = get_object_or_404(Projector, pk=pk)
@@ -224,8 +256,8 @@ def projector_edit(request, pk):
         owner = form.cleaned_data['owner']
         ip = form.cleaned_data['ip']
         f_id = form.cleaned_data['f_id']
-        create_date = form.cleaned_data['create_date']
-        modified_date = form.cleaned_data['modified_date']
+        #create_date = form.cleaned_data['create_date']
+        #modified_date = form.cleaned_data['modified_date']
         purchase_type = form.cleaned_data['purchase_type']
         warranty_type = form.cleaned_data['warranty_type']
         notes = form.cleaned_data['notes']
@@ -259,8 +291,10 @@ class camera_detail(DetailView):
 class camera_create(CreateView):
     model = Camera
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
-        'purchase_type', 'warranty_type','notes','building_location',
-        'room_location','status','make','model']
+        'purchase_type', 'warranty_type','notes','building_location', 
+        'room_location', 'warranty_purchase_date', 'warranty_expiration_date',
+        'status', 'make', 'model']
+    template_name='inventory/edit.html'
 
 
 def camera_edit(request, pk):
@@ -273,8 +307,8 @@ def camera_edit(request, pk):
         owner = form.cleaned_data['owner']
         ip = form.cleaned_data['ip']
         f_id = form.cleaned_data['f_id']
-        create_date = form.cleaned_data['create_date']
-        modified_date = form.cleaned_data['modified_date']
+        #create_date = form.cleaned_data['create_date']
+        #modified_date = form.cleaned_data['modified_date']
         purchase_type = form.cleaned_data['purchase_type']
         warranty_type = form.cleaned_data['warranty_type']
         notes = form.cleaned_data['notes']
@@ -307,9 +341,10 @@ class appliance_detail(DetailView):
 class appliance_create(CreateView):
     model = Appliance
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
-        'purchase_type', 'warranty_type','notes','building_location',
-        'room_location','status','resolution','video_inputs']
-
+        'purchase_type', 'warranty_type','notes','building_location', 
+        'room_location', 'warranty_purchase_date', 'warranty_expiration_date',
+        'status', 'appliance_name']
+    template_name='inventory/edit.html'
 
 def appliance_edit(request, pk):
     instance = get_object_or_404(Appliance, pk=pk)
@@ -321,8 +356,8 @@ def appliance_edit(request, pk):
         owner = form.cleaned_data['owner']
         ip = form.cleaned_data['ip']
         f_id = form.cleaned_data['f_id']
-        create_date = form.cleaned_data['create_date']
-        modified_date = form.cleaned_data['modified_date']
+        #create_date = form.cleaned_data['create_date']
+        #modified_date = form.cleaned_data['modified_date']
         purchase_type = form.cleaned_data['purchase_type']
         warranty_type = form.cleaned_data['warranty_type']
         notes = form.cleaned_data['notes']
@@ -354,9 +389,10 @@ class hardware_detail(DetailView):
 class hardware_create(CreateView):
     model = Misc_Hardware
     fields = ['name','mac_address','issued_to','owner','ip','f_id',
-        'purchase_type', 'warranty_type','notes','building_location',
-        'room_location','status','hardware_name']
-
+        'purchase_type', 'warranty_type','notes','building_location', 
+        'room_location', 'warranty_purchase_date', 'warranty_expiration_date',
+        'status', 'hardware_name']
+    template_name='inventory/edit.html'
 
 def hardware_edit(request, pk):
     instance = get_object_or_404(Misc_Hardware, pk=pk)
@@ -368,8 +404,8 @@ def hardware_edit(request, pk):
         owner = form.cleaned_data['owner']
         ip = form.cleaned_data['ip']
         f_id = form.cleaned_data['f_id']
-        create_date = form.cleaned_data['create_date']
-        modified_date = form.cleaned_data['modified_date']
+        #create_date = form.cleaned_data['create_date']
+        #modified_date = form.cleaned_data['modified_date']
         purchase_type = form.cleaned_data['purchase_type']
         warranty_type = form.cleaned_data['warranty_type']
         notes = form.cleaned_data['notes']
