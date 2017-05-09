@@ -10,7 +10,7 @@
     float: left;
 }
 .main{
-    background: #CCCCCF;
+    background: #F4F4F4;
 }
 
 .right {
@@ -18,8 +18,8 @@
 }
 
 .blank-card {
-    background-color: #444444;
-    color: #FFFFFF;
+    background-color: #AAAAAA;
+    color: #AAAAAA;
 }
 
 .checkbox label, .radio label, label {
@@ -73,10 +73,10 @@ input:required:valid {
 <br/>
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3" style="color:#FFFFFF;">
+    <div class="col-md-6 col-md-offset-3">
     <div>
             {% csrf_token %}
-            <div class="card card-raised">
+            <div class="card card-raised" style="background-color:#FFFFFF;">
                 <div class="content">
 
                     <p><label>Name:</label> {{ object.name }}</p>
@@ -99,9 +99,11 @@ input:required:valid {
                     <p><label>Computer Type:</label> {{ object.computer_type }}</p>
                     <p><label>Hostname:</label> {{ object.hostname }}</p>
 
-                    | <label><a href="{% url 'computer_edit' object.id %}" data-toggle="tooltip" data-placement="bottom" id="computer-update">Edit</a></label> | 
-                    <label><a href="#" data-toggle="tooltip" data-placement="bottom" id="computer-print">Print</a></label> | 
-                    <label><a href="{% url 'computer_index' %}" data-toggle="tooltip" data-placement="bottom" id="back">Back to list</a></label> |
+                    <div title="navigation">
+                        | <label><a href="{% url 'computer_edit' object.id %}" data-toggle="tooltip" data-placement="bottom" id="computer-update">Edit</a></label> | 
+                        <label><a href="#" data-toggle="tooltip" data-placement="bottom" id="computer-print">Print</a></label> | 
+                        <label><a href="{% url 'computer_index' %}" data-toggle="tooltip" data-placement="bottom" id="back">Back to list</a></label> |
+                    </div>
                     {% comment %}<a href="{% url 'delete_object' object.id %}" data-toggle="tooltip" data-placement="bottom" id="delete">Delete</a>{% endcomment %}
 
 

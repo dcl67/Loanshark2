@@ -24,7 +24,7 @@
 
 <div title="buttons">
     <p>    
-        <button type="button" onclick="window.location='add'" align="right">Add</button>
+        <button type="button" onclick="window.location.href='/inventory/index/printer/create/'" align="right">Add</button>
         <button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
 </div>
 
@@ -43,22 +43,7 @@
         {% for p in printers %}
             <tr>
                 <td>
-                    <a href="{% url 'projector_detail' p.id %}" data-toggle="tooltip" data-placement="bottom" id="projector-detail">{{ p.name }}</a>
-                </td>
-                <td>
-                    {{ p.make }}
-                </td>
-                <td>
-                    {{ p.model }}
-                </td>
-                <td>
-                    {{ p.hostname }}
-                </td>
-                <td>
-                    {{ p.toner }}
-                </td>
-                <td>
-                    <a href="{% url 'printer_detail' p.id %}" data-toggle="tooltip" data-placement="bottom" id="printer-detail">{{ p.name }}</a>
+                    <a href="{% url 'printer_detail' p.id %}" data-toggle="tooltip" data-placement="bottom" id="projector-detail">{{ p.name }}</a>
                 </td>
                 <td>
                     {{ p.make }}
@@ -82,7 +67,7 @@
 
 <div title="buttons">
     <p>    
-        <button type="button" onclick="window.location='add'" align="right">Add</button>
+        <button type="button" onclick="window.location.href='/inventory/index/printer/create/'" align="right">Add</button>
         <button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
 </div>
 

@@ -22,7 +22,7 @@
 
 <div title="buttons">
     <p>    
-        <button type="button" onclick="window.location='add'" align="right">Add</button>
+        <button type="button" onclick="window.location.href='/inventory/index/hardware/create/'" align="right">Add</button>
         <button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
 </div>
 
@@ -34,7 +34,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for h in hardwares %}
+        {% for h in hardware %}
             <tr>
                 <td>
                     <a href="{% url 'hardware_detail' h.id %}" data-toggle="tooltip" data-placement="bottom" id="hardware-detail">{{ h.hardware_name }}</a>
@@ -49,7 +49,7 @@
 
 <div title="buttons">
     <p>    
-        <button type="button" onclick="window.location='add'" align="right">Add</button>
+        <button type="button" onclick="window.location.href='/inventory/index/hardware/create/'" align="right">Add</button>
         <button type="button" onclick="window.location='export'" align="right">Export Data</button></p>
 </div>
 

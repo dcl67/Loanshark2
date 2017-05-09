@@ -10,7 +10,7 @@
     float: left;
 }
 .main{
-    background: #CCCCCF;
+    background: #F4F4F4;
 }
 
 .right {
@@ -57,8 +57,6 @@ input:required:valid {
 } 
 </style>
 
-<<<<<<< 2d0817472e2df8ef52b6a88585f032caf793022d:inventory/templates/inventory/hardware_detail.html
-=======
 <div title="nav-label">
     <label>Navigation:</label>
 </div>
@@ -74,12 +72,11 @@ input:required:valid {
 </div>
 <br/>
 
->>>>>>> Front-end changes + Kristen changes implemented:inventory/templates/inventory/misc_hardware_detail.html
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
     <div>
             {% csrf_token %}
-            <div class="card card-raised">
+            <div class="card card-raised" style="background-color:#FFFFFF;">
                 <div class="content">
 
                     <p><label>Name:</label> {{ object.name }}</p>
@@ -97,6 +94,12 @@ input:required:valid {
                     <p><label>Room Location:</label>{{ object.room_location }}</p>
                     <p><label>Status:</label>{{ object.status }}</p>
                     <p><label>Hardware Name:</label>{{ object.hardware_name }}</p>
+
+                    <div title="navigation">
+                        | <label><a href="{% url 'hardware_edit' object.id %}" data-toggle="tooltip" data-placement="bottom" id="computer-update">Edit</a></label> | 
+                        <label><a href="#" data-toggle="tooltip" data-placement="bottom" id="computer-print">Print</a></label> | 
+                        <label><a href="{% url 'hardware_index' %}" data-toggle="tooltip" data-placement="bottom" id="back">Back to list</a></label> |
+                    </div>
 
                 </div>
             </div>

@@ -10,7 +10,7 @@
     float: left;
 }
 .main{
-    background: #CCCCCF;
+    background: #F4F4F4;
 }
 
 .right {
@@ -76,7 +76,7 @@ input:required:valid {
     <div class="col-md-6 col-md-offset-3">
     <div>
             {% csrf_token %}
-            <div class="card card-raised">
+            <div class="card card-raised" style="background-color:#FFFFFF;">
                 <div class="content">
 
                     <p><label>Name:</label> {{ object.name }}</p>
@@ -96,6 +96,11 @@ input:required:valid {
                     <p><label>Make:</label>{{ object.make }}</p>
                     <p><label>Model:</label>{{ object.model }}</p>
 
+                    <div title="navigation">
+                        | <label><a href="{% url 'camera_edit' object.id %}" data-toggle="tooltip" data-placement="bottom" id="computer-update">Edit</a></label> | 
+                        <label><a href="#" data-toggle="tooltip" data-placement="bottom" id="computer-print">Print</a></label> | 
+                        <label><a href="{% url 'camera_index' %}" data-toggle="tooltip" data-placement="bottom" id="back">Back to list</a></label> |
+                    </div>
                 </div>
             </div>
     </div>
