@@ -12,11 +12,7 @@ class Rental(models.Model):
     checkout_time = models.DateTimeField(auto_now=True)
     checkin_time = models.DateTimeField(blank=True, null=True)
     checkedin_flag = models.BooleanField(default=False, blank=True) #false if device is checked out, true if checked in
-    if checkedin_flag is True:
-        checkin_time = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
         return str(self.user) + ' ' + str(self.device)
-        print(self.checkout_time)
-        print(self.checkin_time)
