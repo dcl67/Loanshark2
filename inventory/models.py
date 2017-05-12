@@ -72,6 +72,8 @@ class Resolution(models.Model):
 
 class Printer(Device): #device
     hostname = models.CharField(max_length=100, blank=True, null=True)
+    make = models.CharField(max_length=300, blank=True, null=True)
+    model = models.CharField(max_length=300, blank=True, null=True)
     toner = models.ForeignKey('Toner', blank=True, null=True)
 
 
@@ -141,6 +143,7 @@ class Camera(Device):
 
 
 class Appliance(Device): # examples are Echo360, ClearOne, AV Equipment, etc...
+    #appliance_name = models.CharField(max_length=300, blank=True, null=True)
     appliance_name = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self):
