@@ -21,9 +21,8 @@ input[type=text]:focus {
 
     <center>
         <div id="p">
-            Insert an image down below, here:
             <p><div class="imgcontainer">
-                <center> <img src="{% static "/logo.jpg" %}" alt="Avatar" class="avatar"> </center>
+                <center> <img src="{% static "img/logo.png" %}" alt="Avatar" class="avatar"> </center>
             </div></p>
             <br>
             <p style="font-family:Verdana;color:black;font-size:25px">Welcome to</p>
@@ -31,7 +30,11 @@ input[type=text]:focus {
 
                 <p style="padding-top: 10px; font-family:Verdana;color:black;font-size:19px">What are you searching for today?</p>
                 <br>
-                <p><input type="text" name="search" placeholder="Search.." ></p>
+                <p><form action="#">
+                    <input type="text" name="search" placeholder="Search.." >
+                    <input type="submit" value="Submit">
+                    </form>
+                </p>
                 <br>
                 <a href="/inventory/index/computers/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Computer</a> | 
                 <a href="/inventory/index/display/" data-toggle="tooltip" data-placement="bottom" id="display-href">Display</a> | 

@@ -13,6 +13,10 @@ class Rental(models.Model):
     checkin_time = models.DateTimeField(blank=True, null=True)
     checkedin_flag = models.BooleanField(default=False, blank=True) #false if device is checked out, true if checked in
 
-
     def __str__(self):
         return str(self.user) + ' ' + str(self.device)
+
+class Checkout_History(Rental):
+
+	def __str__(self):
+		return str(self.device)

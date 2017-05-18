@@ -29,19 +29,19 @@
         </tr>
     </thead>
     <tbody>
-        {% for r in rentals %}
+        {% for c in checkoutHistory %}
             <tr>
                 <td>
-                    {{ r.device.id }}
+                    {{ c.device.id }}
                 </td>
                 <td>
-                    {{ r.device.name }}
+                    {{ c.device.name }}
                 </td>
                 <td>
-                    {{ r.user }}
+                    {{ c.user }}
                 </td>
                 <td>
-                    {{ r.checkout_time }}
+                    {{ c.checkout_time }}
                 </td>
             </tr>
         {% endfor %}
