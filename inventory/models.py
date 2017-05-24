@@ -39,11 +39,11 @@ class MacAddress(models.Model):
 
 class Device(models.Model):
     name = models.CharField(max_length=150, blank=True, null=True)
-    mac_address = models.ManyToManyField(MacAddress, blank=True, null=True)
+    mac_address = models.ManyToManyField(MacAddress, blank=True)
     issued_to = models.ForeignKey(User, related_name='issued_to', blank=True, null=True)
     owner = models.ForeignKey(User, related_name='owner', blank=True, null=True)
     ip = models.CharField(max_length=20, blank=True, null=True)
-    f_id = models.CharField(max_length=50, blank=True, null=True)
+    serial_number = models.CharField(max_length=500, blank=True, null=True)
     create_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     modified_date = models.DateTimeField(auto_now=True, blank=True, null=True)
     purchase_type = models.ForeignKey('PurchaseType', blank=True, null=True)
@@ -107,7 +107,7 @@ class Computer(Device): #device
     model = models.CharField(max_length=150, blank=True, null=True)
     processor = models.ForeignKey('Processor', blank=True, null=True)
     computer_type = models.ForeignKey('ComputerType', blank=True, null=True)
-    hostname = models.CharField(max_length=150, blank=True, null=True)
+    #hostname = models.CharField(max_length=150, blank=True, null=True)
     #jack = models.ForeignKey('jack.models.Jack', blank=True, null=True)
 
     def __str__(self):

@@ -9,8 +9,8 @@
 </div>
 <div title="navigation">
     <b>|</b> <a href="/" data-toggle="tooltip" data-placement="bottom" id="home-href">Home</a> <b>|</b> 
-    <a href="/inventory/index/computers/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Currently Checked Out</a> <b>|</b> 
-    <a href="/inventory/index/display/" data-toggle="tooltip" data-placement="bottom" id="display-href">History</a> <b>|</b> 
+    <a href="/rental/checkedout/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Currently Checked Out</a> <b>|</b> 
+    <a href="/rental/history" data-toggle="tooltip" data-placement="bottom" id="display-href">History</a> <b>|</b> 
 </div>
 <br/>
 <div title="buttons">
@@ -32,7 +32,7 @@
         {% for r in rentals %}
             <tr>
                 <td>
-                    {{ r.device.id }}
+                    <a href="{% url 'checkedout_detail' r.id %}">{{ r.device.id }}</a>
                 </td>
                 <td>
                     {{ r.device.name }}

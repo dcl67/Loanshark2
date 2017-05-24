@@ -1,12 +1,16 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-import datetime
+from django.views.generic.detail import DetailView
+from datetime import datetime
+from django.core.urlresolvers import reverse_lazy
+
 
 from models import Rental, Checkout_History
+from forms import RentalForm
 
 def current_checkouts(request):
     rentals = Rental.objects.filter(checkedin_flag= False)
-    print(rentals)
     context = {
     'rentals':rentals
     }
@@ -20,14 +24,18 @@ def checkout_history(request):
     }
     return render(request, 'rental/history.html', context)
 
-#def handle_checkout(request):
-#    
+class checkout_detail(DetailView):
+    model = Rental
+    form = RentalForm
+    
+    def get_context_data(self, **kwargs):
+        context = super(checkout_detail, self).get_context_data(**kwargs)
+        return context
 
 def checkin(request, pk):
     rental = Rental.objects.get(pk=pk)
     rental.checkedin_flag = True
     rental.checkin_time = datetime.now()
-    rental.save()
     record = Checkout_History.objects.create(
         device=rental.device,
         user=rental.user,
@@ -35,10 +43,10 @@ def checkin(request, pk):
         checkin_time=rental.checkin_time,
         checkedin_flag=True
     )
-    #record.save()
-    print(record)
+    Rental.objects.filter(pk=pk).delete()
     #rental.delete()
-    return HttpResponseRedirect(reverse('/inventory/index/computers/'))
+    print('Object should be deleted now')
+    return HttpResponseRedirect(reverse('/'))
 
 def checkout(request, pk):
     rental = Rental.objects.create(
@@ -48,3 +56,5 @@ def checkout(request, pk):
         #checkin_time=null,
         checkedin_flag=False
     )
+
+    return HttpResponseRedirect(reverse('/inventory/index/computers/'))

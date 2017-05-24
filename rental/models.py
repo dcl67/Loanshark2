@@ -16,7 +16,14 @@ class Rental(models.Model):
     def __str__(self):
         return str(self.user) + ' ' + str(self.device)
 
-class Checkout_History(Rental):
+class Checkout_History(Device):
+    
+    device = models.ForeignKey(Device, blank=True, null=True, related_name='checkedout_device')
+    user = models.ForeignKey(User, blank=True, null=True)
+    checkout_time = models.DateTimeField(blank=True, null=True)
+    checkin_time = models.DateTimeField(blank=True, null=True)
+    checkedin_flag = models.BooleanField(default=False, blank=True)
 
-	def __str__(self):
-		return str(self.device)
+
+    def __str__(self):
+        return str(self.user) + ' ' + str(self.device)

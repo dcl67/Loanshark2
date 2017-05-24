@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style type="text/css">
+.remove-btn{
+    padding-top: 30px;
+    cursor: pointer;
+    color: #E91E63;
+    float: left;
+}
+.main{
+    background: #F4F4F4;
+}
+
+.right {
+    float: right;
+}
+
+.blank-card {
+    background-color: #AAAAAA;
+    color: #AAAAAA;
+}
+
+.checkbox label, .radio label, label {
+    font-size: 17px;
+    line-height: 1.42857;
+    color: #000000;
+    font-weight: 400;
+}
+
+label.control-label{
+    font-size: 17px !important;
+}
+#sub-wrapper, #equiptment-wrapper{
+    display: none;
+}
+.sidebar-nav-fixed {
+    width:14%;
+}
+
+/*validation*/
+input:required:invalid, input:focus:invalid {
+  /* insert your own styles for invalid form input */
+  -moz-box-shadow: none;
+}
+
+input:required:valid {
+  /* insert your own styles for valid form input */
+}
+
+:valid {
+    color: green;
+} 
+:invalid {
+    color: red;
+} 
+</style>
+
+<div title="nav-label">
+    <label>Navigation:</label>
+</div>
+<div title="navigation">
+    <b>|</b> <a href="/" data-toggle="tooltip" data-placement="bottom" id="home-href">Home</a> <b>|</b> 
+    <a href="/inventory/index/computers/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Currently Checked Out</a> <b>|</b> 
+    <a href="/inventory/index/display/" data-toggle="tooltip" data-placement="bottom" id="display-href">History</a> <b>|</b> 
+</div>
+<br/>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <div>
+            {% csrf_token %}
+            <div class="card card-raised" style="background-color:#FFFFFF;">
+                <div class="content">
+                    <br>
+                    <p><a href="{% url 'checkin' object.id %}" align="right">Check in</a></p><br/>
+
+
+                    <p><label>Device Name:</label> {{ object.device.name }}</p>
+                    <p><label>Device ID:</label> {{ object.device.id }}</p>
+                    <p><label>Serial Number:</label> {{ object.device.serial_number }}</p>
+                    <p><label>Checkout Date:</label> {{ object.checkout_time }}</p>
+                    <p><label>User:</label> {{ object.user }}</p>
+                    {% comment %}<p><a href="mailto:{% object.user.email %}?Subject=Please%20return%20your%20rented%20laptop">Contact this user</a></p> {% comment %} To do: Define User with properties, emails, etc. {% endcomment %}
+                    <p><label>User:</label> {{ object.user }}</p>
+
+
+
+                </div>
+            </div>
+    </div>
+</div>
+
+{% endblock %}
