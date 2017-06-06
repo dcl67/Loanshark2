@@ -2,15 +2,16 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 from datetime import datetime
 from django.core.urlresolvers import reverse_lazy
 
-
-from models import Rental, Checkout_History
-from forms import RentalForm
+from inventory.models import Device
+from models import Rental
+from forms import *
 
 def current_checkouts(request):
-    rentals = Rental.objects.filter(checkedin_flag= False)
+    rentals = Rental.objects.filter(checkin_time__isnull=True)
     context = {
     'rentals':rentals
     }
@@ -18,11 +19,41 @@ def current_checkouts(request):
 
 
 def checkout_history(request):
-    checkoutHistory = Checkout_History.objects.all()
+    checkoutHistory = Rental.objects.filter(checkin_time__isnull=False)
     context = {
         'checkoutHistory':checkoutHistory
     }
     return render(request, 'rental/history.html', context)
+
+def CheckOutView(request, pk):
+    if request.method == 'GET':
+        form = CheckOutForm
+    else:
+        if isCheckedOut(pk=pk):
+            form = CheckOutForm(request.POST)
+            if form.is_valid():
+                
+                current_device = Device.objects.get(pk=pk)
+                print('Current Device %s', current_device)
+                user = form.cleaned_data['user']
+                Rental.objects.create(device=current_device, user=user)
+                return HttpResponseRedirect('/rental/checkedout/')
+        else:
+            return HttpResponseRedirect('/')
+    return render(request, 'inventory/edit.html', {'form':form})
+
+def isCheckedOut(pk):
+    checked_out = Rental.objects.filter(device__id=pk, checkin_time__isnull=True)
+    for c in checked_out:
+        print c.device
+    
+    print(checked_out)
+    if checked_out.exists():
+        print("Item checked out")
+        return False
+    else:
+        print("Not Checked out")
+        return True
 
 class checkout_detail(DetailView):
     model = Rental
@@ -34,27 +65,6 @@ class checkout_detail(DetailView):
 
 def checkin(request, pk):
     rental = Rental.objects.get(pk=pk)
-    rental.checkedin_flag = True
     rental.checkin_time = datetime.now()
-    record = Checkout_History.objects.create(
-        device=rental.device,
-        user=rental.user,
-        checkout_time=rental.checkout_time,
-        checkin_time=rental.checkin_time,
-        checkedin_flag=True
-    )
-    Rental.objects.filter(pk=pk).delete()
-    #rental.delete()
-    print('Object should be deleted now')
-    return HttpResponseRedirect(reverse('/'))
-
-def checkout(request, pk):
-    rental = Rental.objects.create(
-        device=Device.objects.get(pk=pk),
-        user=request.user.id,
-        #checkout_time=rental.checkout_time,
-        #checkin_time=null,
-        checkedin_flag=False
-    )
-
-    return HttpResponseRedirect(reverse('/inventory/index/computers/'))
+    rental.save()
+    return HttpResponseRedirect('/rental/checkedout')
