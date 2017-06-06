@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.core.urlresolvers import reverse_lazy
 
-from .views import current_checkouts, checkin, checkout, checkout_detail, checkout_history, CheckOutView
+from .views import current_checkouts, checkin, checkout_detail, checkout_history, CheckOutView
 
 urlpatterns = (
     url(r'^checkedout/$', current_checkouts, name='checkedout_list'),
