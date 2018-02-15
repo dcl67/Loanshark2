@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+</link>
+<div title="nav-label">
+    <label>Navigation:</label>
+</div>
+
+<div title="navigation">
+    <b>|</b> <a href="/" data-toggle="tooltip" data-placement="bottom" id="home-href">Home</a> <b>|</b> 
+    <a href="/rental/checkedout/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Currently Checked Out</a> <b>|</b> 
+    <a href="/rental/history" data-toggle="tooltip" data-placement="bottom" id="display-href">History</a> <b>|</b> 
+</div>
+<br/>
+<p>Your request is:<br/>
+{{ request }}</p>
+<p>Your results are:<br/>
+{{ results }}</p>
+
+{% endblock %}

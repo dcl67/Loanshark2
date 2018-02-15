@@ -78,6 +78,7 @@ input:required:valid {
             {% csrf_token %}
             <div class="card card-raised" style="background-color:#FFFFFF;">
                 <div class="content">
+                    <p><a href="{% url 'checkout' object.id %}">Check out</a></p>
 
                     <p><label>Name:</label> {{ object.name }}</p>
                     <p><label>MAC Address:</label> {{ object.mac_address }}</p>

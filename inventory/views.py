@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
+from django.db.models import Q
 
 from .models import *
 from .forms import *
@@ -415,4 +416,16 @@ def hardware_edit(request, pk):
         hardware_name = form.cleaned_data['misc_hardware']
         return HttpResponseRedirect(reverse('hardware_detail', kwargs={'pk':pk}))
     return render(request, 'inventory/edit.html', {'form':form})
+
+# def search_results(request, search_term): #-w
+#     devices  = Device.objects.all()
+#     for term in search_term.split():
+#         devices = devices.filter(Q(name__icontains=term)| Q(serial_number__icontains= term)| Q(owner__icontains=term)| Q(issued_to__icontains=term))
+        
+    
+#     context = {
+#         'devices': devices,
+#     }
+
+#     return render(request 'inventory/search_results.html', {'context': context})
 
