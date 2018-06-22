@@ -28,13 +28,13 @@ input[type=text]:focus {
             <p style="font-family:Verdana;color:black;font-size:25px">Welcome to</p>
             <p style="font-family:Verdana;color:black;font-size:25px">Loanshark</p>
 
-                <p style="padding-top: 20px; font-family:Verdana;color:black;font-size:19px">What are you searching for today?</p>
+                {% comment %}<p style="padding-top: 20px; font-family:Verdana;color:black;font-size:19px">What are you searching for today?</p>
                 <br>
                 <p><form class="" method="get" href="{% url 'search_for_something' %}">
                         <input name="q" id="id_q" type="text" class="form-control" placeholder="Search..." width:20px;/>
                         <button type="submit">Search</button>
                     </form>
-                </p>
+                </p>{% endcomment %}
                 <br>
                 | <a href="/inventory/index/computers/" data-toggle="tooltip" data-placement="bottom" id="computer-href">Computer</a> | 
                 <a href="/inventory/index/display/" data-toggle="tooltip" data-placement="bottom" id="display-href">Display</a> | 
