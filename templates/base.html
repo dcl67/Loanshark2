@@ -50,7 +50,10 @@
                 <a href="/inventory/index/appliance/" data-toggle="tooltip" data-placement="bottom" id="appliance-href">Appliances</a> | 
                 <a href="/inventory/index/hardware/" data-toggle="tooltip" data-placement="bottom" id="hardware-href">Other Hardware</a> |<br>
                 | <a href="/rental/checkedout/" data-toggle="tooltip" data-placement="bottom" id="checkedout-href">Checked-out</a> | 
-                <a href="/rental/history/" data-toggle="tooltip" data-placement="bottom" id="checkouthistory-href">Check-out History</a> | 
+				<a href="/rental/history/" data-toggle="tooltip" data-placement="bottom" id="checkouthistory-href">Check-out History</a> | 
+				{% if user.is_authenticated %}
+					<a href="{% url 'logout' %}?next=/" style="padding-left: 45%;"><b>Sign out</b></a>
+				{% endif %}
 			</div>
 		</div>
 	</nav>

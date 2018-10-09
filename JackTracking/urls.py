@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^inventory/', include('inventory.urls')),
     url(r'^home/', include('home.urls')),
     url(r'^rental/', include('rental.urls')),
+    url('accounts/', include('django.contrib.auth.urls')),
     #url(r'^account/login/$', 'django.contrib.auth.views.login',{('template_name'): ('registration/login.html')}),
     #url(r'^account/logout/$', 'django.contrib.auth.views.logout',{('template_name'): ('registration/logout.html')}),
     url(r'^__debug__/', include(debug_toolbar.urls)),
